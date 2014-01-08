@@ -1,10 +1,10 @@
+  <ul class="sortable">
+    <%- partial('partials/candidate', candidates) %>
+  </ul>
 <form action="/send" method="POST">
   <input type="hidden" name="input" class="hiddeninput">
   <input type="submit" value="Submit">
 </form>
-  <ul class="sortable">
-    <%- partial('partials/candidate', candidates) %>
-  </ul>
 
 <script>
 //    $('.sortable').sortable();
