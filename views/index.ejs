@@ -3,18 +3,9 @@
   </ul>
 <form action="/send" method="POST">
   <input type="hidden" name="input" class="hiddeninput">
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" id="submit">
 </form>
-
-<script>
-//    $('.sortable').sortable();
-var children = [];
-$('li').each(function(i, elem) {
-    children.push($(elem).text());
-});
-
-    $('.hiddeninput').val(children);
-</script>
+<button type="button" id="results" onclick="location.href='/winner';">See Winner</button>
 
 <ul>
 <%- partial('partials/vote', votes) %>
