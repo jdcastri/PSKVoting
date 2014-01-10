@@ -1,5 +1,7 @@
 $(document).ready(function()  {
-	$('.sortable').sortable();
+	$('.sortable').sortable({
+		handle: '.handle'
+	});
 
 	$('#submit').click(function() {
 		$('.hiddeninput').val('');
@@ -9,6 +11,7 @@ $(document).ready(function()  {
 		});
 
 		$('.hiddeninput').val(children);
+		console.log(children);
 	});
 
 });

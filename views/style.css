@@ -1,6 +1,9 @@
 body {
-	background-image: url("skin_2b.jpg");
-	background-size: 100%;
+	background: -webkit-radial-gradient(circle,#EC8B8B,#940B0B);
+}
+
+a:hover {
+	text-decoration: none;
 }
 
 .crest {

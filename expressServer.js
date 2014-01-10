@@ -8,23 +8,33 @@ var candidates = ["Person 1", "Person 2", "Person 3"];
 var vote = [];
 var allVotes = [];
 
-app.get('/', function(request, response) {
+app.get('/', function(req, res) {
+	
+	app.use(express.static(__dirname + "/views"));
+	res.render('index.ejs', {
+		locals: {
+			stylesheets: ["style.css",
+					"bootstrap.css",
+					'http://fonts.googleapis.com/css?family=Montserrat'],
+			scripts: []
+		}
+	});
+});
+
+app.get('/voting', function(request, response) {
 	vote = [];
 	var title = "Voting", 
 	header = "welcome to voting";
 
-	app.use(express.static(__dirname + '/public'));
-	response.render('index.ejs', {
+	app.use(express.static(__dirname));
+	response.render('voting.ejs', {
 		locals: {
-			'title': title,
-			'header': header,
 			'candidates': candidates,
-			'votes': vote,
-			stylesheets: ["style.css"],
+			stylesheets: ["voting_style.css"],
 			scripts: [ 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', 
 				"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js",
-				'js/jquery.sortable.js',
-				'js/interaction.js']
+				'public/js/jquery.sortable.js',
+				'public/js/interaction.js']
 		}
 	});
 });
@@ -40,7 +50,7 @@ app.post('/send', express.bodyParser(), function(req, res) {
    allVotes.push(vote);
 
     if(acceptsHtml(req.headers['accept'])) {
-      res.redirect('/', 302)
+      res.redirect('/voting', 302)
     } else {
       res.send({status:"ok", message:"Vote received"})
     }

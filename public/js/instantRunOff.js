@@ -1,5 +1,6 @@
 // votes is a double array. Rows are a single person's votes.
-function runVoting(votes) {
+function runVoting(arr) {
+	var votes = $.extend(true, [], arr);
 	if (votes.length == 0) { return "No votes"; }
 
 	var numVotes = votes.length;
