@@ -1,0 +1,36 @@
+body {
+	background-image: url("skin_2b.jpg");
+	background-size: 100%;
+}
+
+.crest {
+	height: auto;
+	width: 100%;
+	margin: 100px 0 50px;
+}
+
+.outer {
+	width:100%;
+}
+
+.inner {
+	width: 25%;
+	margin: 0 auto;
+}
+
+#btn {
+	border: solid 3px black;
+	padding: 10px 20px;
+	border-radius: 12px;
+	text-align: center;
+	font-size: 200%;
+	color: black;
+	margin: 0 0.7%;
+	font-family: montserrat, sans-serif;
+	font-weight: 400;
+}
+
+#btn:hover {
+	background: black;
+	color: #AA3E3E;
+}
