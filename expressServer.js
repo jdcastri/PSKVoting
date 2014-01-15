@@ -4,38 +4,38 @@ var irv = require("./public/js/instantRunOff.js");
 var app = express.createServer();
 app.listen(8888);
 
-var candidates = ["Person 1", "Person 2", "Person 3"];
+app.set('view engine', 'jade');
+
 var vote = [];
 var allVotes = [];
 
 app.get('/', function(req, res) {
 	
 	app.use(express.static(__dirname + "/views"));
-	res.render('index.ejs', {
-		locals: {
+	res.render('index', {
+				layout: false,
 			stylesheets: ["style.css",
 					"bootstrap.css",
-					'http://fonts.googleapis.com/css?family=Montserrat'],
-			scripts: []
-		}
+					'http://fonts.googleapis.com/css?family=Montserrat']
 	});
 });
 
 app.get('/voting', function(request, response) {
 	vote = [];
-	var title = "Voting", 
-	header = "welcome to voting";
+	var candidates = ["Person 1", "Person 2", "Person 3"];
+	var title = "Election Title";
 
 	app.use(express.static(__dirname));
-	response.render('voting.ejs', {
-		locals: {
+	response.render('voting', {
+			ElectionTitle: title,
 			'candidates': candidates,
-			stylesheets: ["voting_style.css"],
+			stylesheets: ["views/bootstrap.css",
+					"views/voting_style.css",
+					'http://fonts.googleapis.com/css?family=Montserrat'],
 			scripts: [ 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', 
 				"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js",
 				'public/js/jquery.sortable.js',
 				'public/js/interaction.js']
-		}
 	});
 });
 

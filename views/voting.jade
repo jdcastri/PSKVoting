@@ -1,0 +1,12 @@
+div.container#wrapper
+	div#title=ElectionTitle
+	div#choicesLabel Top Choice
+	ul.sortable
+		- each candidate in candidates
+			li=candidate
+	div#choicesLabel Bottom Choice
+
+	form(action="/send" method="POST")
+		input.hiddeninput(type="hidden" name="input")
+		input.submit#btn(type="submit" value="Submit")
+	button.results#btn(type="button" onclick="location.href='/winner';") See Winner

@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+	head
+		- each ss in stylesheets
+			link(rel='stylesheet' href=ss)
+		- each taco in scripts 
+			script(src=taco)		
+		meta(charset="utf-8")
+	body
+		div.header
+			div.banner Triple-T
+		nav.navbar.navbar-default.navbar-inverse(role="navigation")
+			div.navbar-header
+				a.navbar-brand(href="../") Home
+			p.navbar-text.navbar-right Whatsup, User
+			div.collapse.navbar-collapse
+				ul.nav.navbar-nav
+					li.active 
+						a(href="/voting") Voting
+					li
+						a(href="#") Late Plate
+					li
+						a(href="#") Bibles
+					li
+						a(href="#") House Meeting
+					li
+						a(href="#") Forms
+		!= body
+

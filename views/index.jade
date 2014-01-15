@@ -1,0 +1,19 @@
+doctype
+html(lang='en')
+	head
+		- each ss in stylesheets
+			link(rel='stylesheet' href=ss)
+	body
+		div.outer
+			div.inner
+				img.crest(src="phi sig crest.png")
+		div.row-fluid
+			div.col-md-2
+			div.col-md-8
+				a(href="/voting") 
+					span#btn VOTING
+				span#btn LATE PLATE
+				span#btn BIBLES
+				span#btn HOUSE MEETING
+				span#btn FORMS
+			div.col-md-2
