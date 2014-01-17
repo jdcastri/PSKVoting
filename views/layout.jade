@@ -1,10 +1,12 @@
 doctype html
 html(lang="en")
 	head
-		- each ss in stylesheets
-			link(rel='stylesheet' href=ss)
-		- each taco in scripts 
-			script(src=taco)		
+		if(stylesheets)
+			- each ss in stylesheets
+				link(rel='stylesheet' href=ss)
+		if(scripts)
+			- each script in scripts 
+				script(src=script)
 		meta(charset="utf-8")
 	body
 		div.header
@@ -16,7 +18,7 @@ html(lang="en")
 			div.collapse.navbar-collapse
 				ul.nav.navbar-nav
 					li.active 
-						a(href="/voting") Voting
+						a(href="/newElection") Voting
 					li
 						a(href="#") Late Plate
 					li

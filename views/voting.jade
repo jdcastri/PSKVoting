@@ -1,12 +1,13 @@
 div.container#wrapper
 	div#title=ElectionTitle
-	div#choicesLabel Top Choice
+	div#label Top Choice
 	ul.sortable
 		- each candidate in candidates
 			li=candidate
-	div#choicesLabel Bottom Choice
+	div#label Bottom Choice
 
-	form(action="/send" method="POST")
+	- var sendURL = "/send/" + voteID
+	form(action=sendURL method="POST")
 		input.hiddeninput(type="hidden" name="input")
 		input.submit#btn(type="submit" value="Submit")
-	button.results#btn(type="button" onclick="location.href='/winner';") See Winner
+	button.results#btn(type="button") See Winner

@@ -1,0 +1,15 @@
+#wrapper {
+	width: 65%;
+}
+
+.newElection {
+	float: right;
+}
+
+.glyphicon-plus-sign {
+	color: green;
+}
+
+.glyphicon-minus-sign {
+	color: red;
+}

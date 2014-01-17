@@ -1,37 +1,7 @@
-body {
-	background-image: url('otis_redding.png');
-        font-family: montserrat, sans-serif;
-}
-
-.header {
-	background: rgb(114, 5, 5);
-}
-
-.banner {
-	text-align: center;
-	font-weight: 700;
-	font-size: 45px;
-	padding: 20px 0px;
-	color: white;
-}
-
-#wrapper {
-	background-image: url('cloth_alike.png');
-	border: solid gray 1px;
-	border-radius: 10px;
-	width: 30%;
-	padding: 30px 30px 25px;
-}
-
 #title {
 	text-align: center;
 	font-size: 30px;
 	margin-bottom: 10px;
-}
-
-#choicesLabel {
-	text-align: center;
-	color: gray;
 }
 
 .sortable {
@@ -54,24 +24,6 @@ body {
 	border-radius: 5px;
 	margin: 10px auto;
 	width: 80%;	
-}
-
-#btn {
-	background: none;
-        border: solid 3px rgb(114, 5, 5);
-        padding: 10px 20px;
-        border-radius: 12px;
-        text-align: center;
-        font-size: 15px;
-        color: rgb(114, 5, 5);
-        margin: 40px 0.7% 0px;
-        font-weight: 399;
-	float: right;
-}
-
-#btn:hover {
-        background: rgb(114, 5, 5);
-        color: white;
 }
 
 .results {

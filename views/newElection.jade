@@ -1,0 +1,22 @@
+div.row-fluid
+	div.col-md-6
+		div#wrapper.newElection
+			div#title Make a new election
+			form(action="/newElectionSubmit" method="POST")
+				div.form-group
+					label Election Name 
+					input.form-control(type="text" name="electionName" placeholder="election name")
+				div.form-group
+					label Candidates 
+					input.form-control(type="text" name="candidates" placeholder="new candidate")
+					input.form-control(type="text" name="candidates" placeholder="new candidate")
+					input.submit#btn(type="submit" value="Submit")
+					span.glyphicon.glyphicon-plus-sign.addCandidate
+	div.col-md-6
+		div#wrapper.previousElections
+			div#title Previous 10 Elections
+			p#label Top most recent
+			ul
+				- each election in tenElections
+					li
+						a(href="/voting/" + election[1])=election[0]
