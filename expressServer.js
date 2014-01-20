@@ -147,7 +147,8 @@ app.get('/polls', function(req, res) {
 					"/views/main.css",
 					"views/polls_voting.css",
 					'http://fonts.googleapis.com/css?family=Montserrat'],
-			scripts: []
+			scripts: [ 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', 
+				 "/public/js/newPoll.js"]
 		});
 	});
 });
@@ -162,9 +163,11 @@ app.post('/polls/submit', function(req,res) {
 	
 	if(req.body && req.body.pollName && req.body.options && hasNoEmptyFields(req.body.options)) {
 		var optionsArr = req.body.options;
-		console.log(optionsArr);
+		var type = req.body.type;
+		console.log(type);
 		db.collection('polls').insert({ 
 						name: req.body.pollName,
+						type: type,
 						options: optionsArr,
 						votes: []
 				}, function(err, result) {
@@ -194,6 +197,7 @@ app.get('/polls/:id', function(req, res) {
 					pollTitle: title,
 					options: options,
 					votes: result.votes,
+					type: result.type,
 					stylesheets: ["/views/bootstrap/css/bootstrap.min.css",
 							"/views/main.css",
 							"/views/poll_template.css",

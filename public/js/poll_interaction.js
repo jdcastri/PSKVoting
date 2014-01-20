@@ -1,7 +1,14 @@
 $(document).ready( function() {
 
 	$(document).on('click','td#colorable', function() {
-		$(this).toggleClass('green');
+		if($('#type').html() == "Single") {
+			var willTurnOn = !($(this).hasClass('green'));
+			$('td#colorable').removeClass('green');
+			if(willTurnOn)
+				$(this).addClass('green');
+		} else {
+			$(this).toggleClass('green');
+		}
 	});
 
 	$('#btn').click( function() {
