@@ -9,6 +9,12 @@ body {
 	margin-bottom: 10px;
 }
 
+#subtitle {
+	margin: -16px 0 10px;
+	text-align: center;
+	color: gray;
+}
+
 #label {
 	text-align: center;
 	color: gray;

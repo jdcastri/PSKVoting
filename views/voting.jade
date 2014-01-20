@@ -1,5 +1,6 @@
 div.container#wrapper
 	div#title=ElectionTitle
+	div#subtitle Drag candidates to change order
 	div#label Top Choice
 	ul.sortable
 		- each candidate in candidates
@@ -10,4 +11,4 @@ div.container#wrapper
 	form(action=sendURL method="POST")
 		input.hiddeninput(type="hidden" name="input")
 		input.submit#btn(type="submit" value="Submit")
-	button.results#btn(type="button") See Winner
+button.results#btn(type="button") See Winner

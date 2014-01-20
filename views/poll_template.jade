@@ -1,0 +1,41 @@
+- var totals = new Array()
+div.container#wrapper
+	div#title=pollTitle
+
+	table(border="1")
+		tbody
+			tr
+				td
+				- each option in options
+					th=option
+			- each vote in votes
+				- var user = vote['user'];
+				- var binaryVote = vote['vote'];
+				tr
+					td=user
+					- for(var i=0; i<binaryVote.length; i++)
+						- if(!totals[i])
+							- totals[i] = 0
+						- if(binaryVote[i] == '1')
+							- totals[i] = totals[i] + 1;
+							td.green
+						- else
+							td
+			tr
+				td
+					div
+						input#initials(class="form-control" type="text" size="3")
+
+				-var count = options.length;
+				-for(var i=0; i<count; i++)
+					td#colorable
+			tr
+				td.total
+				-for(var i=0; i<totals.length; i++)
+					td=totals[i]
+
+	- var sendUrl = "/polls/submit/" + pollID;
+	form(method="POST" action=sendUrl)
+		input#hidden(type="hidden" name="input")
+		input#btn(type="submit" value="Submit")
+

@@ -10,13 +10,13 @@ $(document).ready(function()  {
 
 		$('.hiddeninput').val(children);
 	
-//		$('#wrapper').append("<span id=\"voteConfirmation\">Vote Received</span>");
+		$('#wrapper').append('<span id="voteConfirmation">Vote Received</span>');
 	});
 
 	$('.results').click(function() {
 		var url = window.location;
 		var id = url.href.substring(url.href.indexOf('/voting/') + '/voting/'.length);
-		$(location).attr('href', '/winner/' + id); 
+		$(location).attr('href', 'voting/winner/' + id); 
 	});
 
 });

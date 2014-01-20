@@ -25,7 +25,7 @@ app.get('/', function(req, res) {
 	});
 });
 
-app.get('/newElection', function(req, res) {
+app.get('/voting', function(req, res) {
 	db.collection('voting').find().sort({_id:-1}).limit(10).toArray(function(err, result) {
 		var tenMostRecentElections = [];
 		for(var i=0; i<result.length; i++) {
@@ -35,7 +35,7 @@ app.get('/newElection', function(req, res) {
 		res.render('newElection', {
 			stylesheets: ["views/bootstrap/css/bootstrap.min.css",
 					"/views/main.css",
-					"views/newElection.css",
+					"views/polls_voting.css",
 					'http://fonts.googleapis.com/css?family=Montserrat'],
 			scripts: ['http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
 				"public/js/newElection.js"],
@@ -44,7 +44,7 @@ app.get('/newElection', function(req, res) {
 	});
 });
 
-app.post('/newElectionSubmit', function(req,res) {
+app.post('voting/submitNewElection', function(req,res) {
 	function hasNoEmptyFields(arr) {
 		for(var i=0; i<arr.length; i++) {
 			if(!arr[i]) return false;
@@ -103,7 +103,7 @@ app.get('/voting/:id', function(req, res) {
 
 });
 
-app.get('/winner/:id', function(req, res) {
+app.get('voting/winner/:id', function(req, res) {
 	db.collection('voting').findOne({_id: db.ObjectID.createFromHexString(req.params.id + '')}, function(err,result) {
 		if(err) throw err;
 		if(result) {
@@ -114,7 +114,7 @@ app.get('/winner/:id', function(req, res) {
 	});
 });
 
-app.post('/send/:id', express.bodyParser(), function(req, res) {
+app.post('voting/sendVote/:id', function(req, res) {
 	if (req.body && req.body.input) {
 		vote = req.body.input.split(','); 
 		db.collection('voting').update({_id: db.ObjectID.createFromHexString(req.params.id + '')}, {'$push':{votes: vote}}, function(err) {
@@ -131,6 +131,95 @@ app.post('/send/:id', express.bodyParser(), function(req, res) {
 	} else {
 		//no vote?
 		res.send({status:"nok", message:"No vote received"});
+	}
+});
+
+app.get('/polls', function(req, res) {
+	db.collection('polls').find().sort({_id:-1}).limit(10).toArray(function(err, result) {
+		var tenMostRecentElections = [];
+		for(var i=0; i<result.length; i++) {
+			tenMostRecentElections.push([result[i].name, result[i]._id]);
+		}
+
+		res.render('polls', {
+			tenPolls: tenMostRecentElections,
+			stylesheets: ["/views/bootstrap/css/bootstrap.min.css",
+					"/views/main.css",
+					"views/polls_voting.css",
+					'http://fonts.googleapis.com/css?family=Montserrat'],
+			scripts: []
+		});
+	});
+});
+
+app.post('/polls/submit', function(req,res) {
+	function hasNoEmptyFields(arr) {
+		for(var i=0; i<arr.length; i++) {
+			if(!arr[i]) return false;
+		}
+		return true;
+	}
+	
+	if(req.body && req.body.pollName && req.body.options && hasNoEmptyFields(req.body.options)) {
+		var optionsArr = req.body.options;
+		console.log(optionsArr);
+		db.collection('polls').insert({ 
+						name: req.body.pollName,
+						options: optionsArr,
+						votes: []
+				}, function(err, result) {
+					if (err) throw err;
+					if (result) {
+						console.log('Added!');
+						var id = result[0]._id.valueOf();
+						res.redirect('/polls/' + id, 302)
+					}
+		});
+	} else {
+		res.send("empty Fields");
+	}
+	
+});	
+
+app.get('/polls/:id', function(req, res) {
+	db.collection('polls').findOne({_id: db.ObjectID.createFromHexString(req.params.id + '')}, function(err, result) {
+		if(err) throw err;
+		if(result) {
+			console.log("found entry");
+			var options = result.options;
+			var title = result.name;
+
+			res.render('poll_template', {
+					pollID: req.params.id,
+					pollTitle: title,
+					options: options,
+					votes: result.votes,
+					stylesheets: ["/views/bootstrap/css/bootstrap.min.css",
+							"/views/main.css",
+							"/views/poll_template.css",
+							'http://fonts.googleapis.com/css?family=Montserrat'],
+					scripts: [ 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', 
+						"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js",
+						'/public/js/jquery.sortable.js',
+						'/public/js/poll_interaction.js']
+			});
+			console.log("Page rendered");
+		}
+	});
+
+});
+
+app.post('/polls/submit/:id', function(req, res) {
+	if(req.body && req.body.input){
+		var obj = JSON.parse(req.body.input);
+		db.collection('polls').update({_id: db.ObjectID.createFromHexString(req.params.id + '')}, {'$push': {votes: obj}}, function(err) {
+			if(err) throw err;
+			console.log('Received Vote');
+		});		
+		res.redirect('/polls/' + req.params.id, 302);
+	}
+	else {
+		res.send("No input");
 	}
 });
 

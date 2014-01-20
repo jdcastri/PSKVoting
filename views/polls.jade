@@ -1,0 +1,23 @@
+div.row-fluid
+	div.col-md-6
+		div#wrapper.newElection
+			div#title Make a new poll
+			form(action="polls/submit" method="POST")
+				div.form-group
+					label Poll Name
+					input.form-control(type="text" name="pollName" placeholder="poll name")
+				div.form-group
+					label Options
+					input.form-control(type="text" name="options" placeholder="new option")
+					input.form-control(type="text" name="options" placeholder="new option")
+					input.submit#btn(type="submit" value="Create Poll")
+					div.glyphicon.glyphicon-plus-sign.addOption
+	div.col-md-6
+		div#wrapper.previousPolls
+			div#title Previous 10 Polls
+			p#subtitle Top most recent
+			ul
+				-if(tenPolls)
+					- each poll in tenPolls
+						li
+							a(href="/polls/" + poll[1])=poll[0]

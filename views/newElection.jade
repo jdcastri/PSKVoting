@@ -10,12 +10,12 @@ div.row-fluid
 					label Candidates 
 					input.form-control(type="text" name="candidates" placeholder="new candidate")
 					input.form-control(type="text" name="candidates" placeholder="new candidate")
-					input.submit#btn(type="submit" value="Submit")
-					span.glyphicon.glyphicon-plus-sign.addCandidate
+					input.submit#btn(type="submit" value="Create Election")
+					div.glyphicon.glyphicon-plus-sign.addCandidate
 	div.col-md-6
 		div#wrapper.previousElections
 			div#title Previous 10 Elections
-			p#label Top most recent
+			p#subtitle Top most recent
 			ul
 				- each election in tenElections
 					li

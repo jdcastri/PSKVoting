@@ -1,0 +1,21 @@
+table {
+	width: 100%;
+	text-align: center;
+}
+
+/* because bootstrap sucks */
+th {
+	text-align: center;
+}
+
+tr td:first-child {
+	width:15%;
+}
+
+td {
+	height:29px;
+}
+
+.green {
+	background-color: green;
+}
