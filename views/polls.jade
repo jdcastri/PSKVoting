@@ -7,6 +7,15 @@ div.row-fluid
 					label Poll Name
 					input.form-control(type="text" name="pollName" placeholder="poll name")
 				div.form-group
+					label Poll Type
+					p.help-block Should voters be able to choose multiple options, or a single option?
+					div
+						input(type="radio" name="type" value="Mulitple" checked)
+						| Multiple
+					div
+						input(type="radio" name="type" value="Single")
+						| Single
+				div.form-group
 					label Options
 					input.form-control(type="text" name="options" placeholder="new option")
 					input.form-control(type="text" name="options" placeholder="new option")
